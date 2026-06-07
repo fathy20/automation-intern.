@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local configuration (Contains sensitive App Password!)
+config.json
+
+# Temporary uploads and attachments
+temp_uploads/
+temp_attachments/
+
+# Execution reports
+delivery_report.csv
+
+# System logs and metadata
+.system_generated/
+*.log
