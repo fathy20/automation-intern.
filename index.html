@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HapticVision & SuperBrain Outreach Hub</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+    </div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation & Quick Settings -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-brain brand-icon"></i>
+                <div class="brand-text">
+                    <h2>HapticVision</h2>
+                    <span>Outreach Hub</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="campaigns">
+                    <i class="fa-solid fa-paper-plane"></i> Campaigns
+                </a>
+                <a href="#" class="nav-item" data-tab="contacts">
+                    <i class="fa-solid fa-users"></i> Contacts Directory
+                </a>
+                <a href="#" class="nav-item" data-tab="config">
+                    <i class="fa-solid fa-sliders"></i> EmailJS Settings
+                </a>
+            </nav>
+            
+            <!-- Quick Info card -->
+            <div class="sidebar-footer">
+                <div class="profile-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Fathy" class="profile-img" alt="Avatar">
+                    <div class="profile-info">
+                        <h4 id="sidebar-sender-name">Fathy Sharaf</h4>
+                        <p>Software Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <div>
+                    <h1 id="page-title">Outreach Campaigns</h1>
+                    <p id="page-desc">Automate your health-tech partnership campaigns and internship outreach.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="btn-quick-preview">
+                        <i class="fa-regular fa-eye"></i> Quick Test Mail
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Tab 1: Campaigns Dispatcher -->
+            <section class="tab-content active" id="tab-campaigns">
+                <div class="grid grid-2-1">
+                    <!-- Left: Campaign Settings & Selection -->
+                    <div class="card card-glass">
+                        <h3 class="card-title"><i class="fa-solid fa-bullhorn text-gradient"></i> Campaign Configuration</h3>
+                        
+                        <div class="form-group">
+                            <label for="campaign-template">Email Outreach Template</label>
+                            <select id="campaign-template" class="form-control">
+                                <option value="SuperBrain Partnership Outreach">SuperBrain Partnership Outreach</option>
+                                <option value="HapticVision Sponsorship (English)">HapticVision Sponsorship (English)</option>
+                                <option value="Summer Internship Application">Summer Internship Application (تدريب صيفي)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="display: none;">
+                            <label>Attachments (Note: EmailJS supports file attachments only if configured inside your template)</label>
+                            <div class="file-uploader" style="opacity: 0.5; pointer-events: none;">
+                                <i class="fa-solid fa-cloud-arrow-up file-icon"></i>
+                                <p>Attachments are handled inside EmailJS Templates</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Target Recipients</label>
+                            <div class="recipient-selector-container">
+                                <div class="recipient-controls">
+                                    <button class="btn btn-small" id="select-all-recipients"><i class="fa-solid fa-check-double"></i> Select All</button>
+                                    <button class="btn btn-small btn-secondary" id="deselect-all-recipients"><i class="fa-solid fa-xmark"></i> Deselect All</button>
+                                </div>
+                                <div class="recipient-checkbox-list" id="dispatch-recipients-list">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-footer">
+                            <button class="btn btn-primary btn-large" id="btn-start-campaign">
+                                <i class="fa-solid fa-rocket"></i> Launch Outreach Campaign
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Dynamic Live Preview -->
+                    <div class="card card-glass preview-container">
+                        <div class="preview-header">
+                            <span class="preview-tag"><i class="fa-regular fa-eye"></i> Real-time Live Preview</span>
+                            <div class="preview-recipient-selector">
+                                <select id="preview-recipient-select" class="form-control-small">
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="preview-subject-bar">
+                            <strong>Subject: </strong> <span id="preview-subject-text">Loading subject...</span>
+                        </div>
+                        <div class="preview-body-wrapper">
+                            <iframe id="preview-iframe" src="about:blank"></iframe>
+                        </div>
+
+                        <div class="linkedin-outreach-box" style="margin-top: 20px; padding: 15px; border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; background: rgba(15, 23, 42, 0.4);">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif;"><i class="fa-brands fa-linkedin" style="color: #0077b5; font-size: 1.1rem;"></i> LinkedIn Outreach Assistant</h4>
+                            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <a href="#" target="_blank" id="btn-linkedin-search" class="btn btn-secondary btn-small" style="text-decoration: none; width: 100%; justify-content: center; font-size: 0.8rem; font-weight: 500;">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Search employees on LinkedIn
+                                </a>
+                            </div>
+                            <textarea id="linkedin-message-text" class="form-control" rows="4" style="font-size: 0.8rem; background: rgba(0,0,0,0.2); resize: none; margin-bottom: 10px; border-color: rgba(255,255,255,0.05);" readonly></textarea>
+                            <button class="btn btn-primary btn-small" id="btn-copy-linkedin" style="width: 100%; justify-content: center; font-size: 0.8rem; font-weight: 600;">
+                                <i class="fa-regular fa-copy"></i> Copy Connection Note
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab 2: Contacts Directory -->
+            <section class="tab-content" id="tab-contacts">
+                <div class="card card-glass">
+                    <div class="card-header-flex">
+                        <h3 class="card-title"><i class="fa-solid fa-users text-gradient"></i> Contacts Directory</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-secondary" id="btn-reset-contacts-default">
+                                <i class="fa-solid fa-arrow-rotate-left"></i> Reset Defaults
+                            </button>
+                            <button class="btn btn-primary" id="btn-add-contact-modal">
+                                <i class="fa-solid fa-user-plus"></i> Add Recipient
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-filter-bar">
+                        <div class="search-input-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="search-contacts" placeholder="Search by organization, name, or email...">
+                        </div>
+                    </div>
+                    
+                    <div class="table-wrapper">
+                        <table class="custom-table" id="contacts-table">
+                            <thead>
+                                <tr>
+                                    <th>Organization</th>
+                                    <th>Contact Person</th>
+                                    <th>Email Address</th>
+                                    <th>Category</th>
+                                    <th>Notes</th>
+                                    <th style="width: 100px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contacts-table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab 3: Configuration Settings -->
+            <section class="tab-content" id="tab-config">
+                <div class="grid grid-2">
+                    <!-- EmailJS Configurations -->
+                    <div class="card card-glass">
+                        <h3 class="card-title"><i class="fa-solid fa-envelope-open-text text-gradient"></i> EmailJS Configuration</h3>
+                        <form id="emailjs-settings-form">
+                            <div class="form-group">
+                                <label for="emailjs_service_id">EmailJS Service ID</label>
+                                <input type="text" id="emailjs_service_id" class="form-control" required placeholder="e.g., service_xxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjs_template_id">EmailJS Template ID</label>
+                                <input type="text" id="emailjs_template_id" class="form-control" required placeholder="e.g., template_xxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjs_public_key">EmailJS Public Key</label>
+                                <input type="text" id="emailjs_public_key" class="form-control" required placeholder="e.g., user_xxxxxx or Public Key">
+                            </div>
+                            
+                            <div class="info-accent">
+                                <strong>💡 Need a free EmailJS Account?</strong>
+                                <ol style="margin-top: 5px; padding-left: 15px; color: var(--text-secondary); font-size: 0.85rem;">
+                                    <li>Register at <a href="https://www.emailjs.com/" target="_blank" style="color: #3b82f6; text-decoration: underline;">emailjs.com</a>.</li>
+                                    <li>Link your Gmail account in <strong>"Email Services"</strong> to get a <strong>Service ID</strong>.</li>
+                                    <li>Create an <strong>"Email Template"</strong> with variables:
+                                        <br><code>{{subject}}</code>, <code>{{html_body}}</code>, <code>{{plain_body}}</code>, <code>{{to_email}}</code>.
+                                    </li>
+                                    <li>Set the "To Email" field inside the EmailJS Template settings to <code>{{to_email}}</code>.</li>
+                                    <li>Copy your <strong>Public Key</strong> from Account Settings.</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="action-footer">
+                                <button type="submit" class="btn btn-primary">Save EmailJS Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Sender Profile Settings -->
+                    <div class="card card-glass">
+                        <h3 class="card-title"><i class="fa-solid fa-user-gear text-gradient"></i> Sender Signature Settings</h3>
+                        <form id="sender-signature-form">
+                            <div class="form-group">
+                                <label for="sender_name">Full Name</label>
+                                <input type="text" id="sender_name" class="form-control" required placeholder="Fathy Sharaf">
+                            </div>
+                            <div class="form-group">
+                                <label for="sender_phone">Phone Number</label>
+                                <input type="text" id="sender_phone" class="form-control" required placeholder="01002137288">
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedin_url">LinkedIn Profile Link</label>
+                                <input type="url" id="linkedin_url" class="form-control" placeholder="https://www.linkedin.com/in/fathysharaf/">
+                            </div>
+                            
+                            <div class="action-footer">
+                                <button type="submit" class="btn btn-primary">Save Signature Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Campaign Progress & Execution Modal -->
+    <div class="modal" id="modal-campaign-progress">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-paper-plane pulse"></i> Running Campaign...</h3>
+            </div>
+            <div class="modal-body">
+                <p>Sending outreach campaign via EmailJS. Please do not close this window.</p>
+                <div class="progress-container">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="campaign-progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="campaign-progress-pct">0%</span>
+                </div>
+                
+                <div class="dispatch-logs-container" id="dispatch-logs">
+                    <!-- Logs generated dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer" id="campaign-modal-footer" style="display: none;">
+                <button class="btn btn-secondary" id="btn-close-progress-modal">Dismiss</button>
+                <a href="#" class="btn btn-primary" id="btn-download-report" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-download"></i> Download Report
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Add/Edit Modal -->
+    <div class="modal" id="modal-contact-form">
+        <div class="modal-content modal-content-small">
+            <div class="modal-header">
+                <h3 id="contact-modal-title">Add New Recipient</h3>
+                <i class="fa-solid fa-xmark close-modal-trigger" id="close-contact-modal"></i>
+            </div>
+            <form id="contact-form-data">
+                <input type="hidden" id="contact-edit-index">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="c_company_name">Company / Organization</label>
+                        <input type="text" id="c_company_name" class="form-control" required placeholder="e.g., NAID">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_contact_person">Contact Person</label>
+                        <input type="text" id="c_contact_person" class="form-control" required placeholder="e.g., المسؤول في الأكاديمية">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_email">Email Address</label>
+                        <input type="email" id="c_email" class="form-control" required placeholder="e.g., info@naid.gov.eg">
+                    </div>
+                    <div class="form-group">
+                        <label for="c_category">Category</label>
+                        <select id="c_category" class="form-control" required>
+                            <option value="NAID">NAID (National Academy)</option>
+                            <option value="Baseera">Baseera (Association)</option>
+                            <option value="CSR">CSR / Corporate (NBE, Siemens)</option>
+                            <option value="General">General (Healthcare / Other)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="c_notes">Notes</label>
+                        <input type="text" id="c_notes" class="form-control" placeholder="Optional notes">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal-trigger">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-contact">Save Recipient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quick Notification Toast -->
+    <div class="toast" id="toast">
+        <i id="toast-icon" class="fa-solid fa-circle-info"></i>
+        <span id="toast-message">Message text</span>
+    </div>
+
+    <script src="./static/js/app.js"></script>
+</body>
+</html>
