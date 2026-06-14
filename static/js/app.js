@@ -530,7 +530,9 @@ ${senderEmail}${linkedinText}`;
         if (saved) {
             config = JSON.parse(saved);
             if (!config.emailjs_service_id) config.emailjs_service_id = "service_74cjfib";
-            if (!config.emailjs_template_id || config.emailjs_template_id === "B7pluV26yjwcFWNsRIrfZ") {
+            if (!config.emailjs_template_id || 
+                config.emailjs_template_id === "B7pluV26yjwcFWNsRIrfZ" || 
+                config.emailjs_template_id === "__ejs-test-mail-service__") {
                 config.emailjs_template_id = "template_u1zl9z9";
                 localStorage.setItem('emailjs_config', JSON.stringify(config));
             }
@@ -570,6 +572,18 @@ ${senderEmail}${linkedinText}`;
         showToast('EmailJS configuration saved!', 'success');
         updateLivePreview();
     });
+
+    const btnResetEmailJS = document.getElementById('btn-reset-emailjs');
+    if (btnResetEmailJS) {
+        btnResetEmailJS.addEventListener('click', () => {
+            if (confirm("Are you sure you want to reset EmailJS settings to default values?")) {
+                localStorage.removeItem('emailjs_config');
+                loadConfig();
+                showToast('EmailJS configurations reset to defaults!', 'success');
+                updateLivePreview();
+            }
+        });
+    }
 
     signatureForm.addEventListener('submit', (e) => {
         e.preventDefault();
