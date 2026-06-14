@@ -331,7 +331,26 @@
         <i id="toast-icon" class="fa-solid fa-circle-info"></i>
         <span id="toast-message">Message text</span>
     </div>
-
-    <script src="./static/js/app.js"></script>
+    <!-- Force clear any stale cached EmailJS config -->
+    <script>
+        (function() {
+            var CORRECT_TEMPLATE = 'template_u1zl9z9';
+            var saved = localStorage.getItem('emailjs_config');
+            if (saved) {
+                try {
+                    var cfg = JSON.parse(saved);
+                    var bad = ['B7pluV26yjwcFWNsRIrfZ', '__ejs-test-mail-service__', ''];
+                    if (!cfg.emailjs_template_id || bad.indexOf(cfg.emailjs_template_id) !== -1) {
+                        cfg.emailjs_template_id = CORRECT_TEMPLATE;
+                        localStorage.setItem('emailjs_config', JSON.stringify(cfg));
+                        console.log('[FIX] Template ID auto-corrected to:', CORRECT_TEMPLATE);
+                    }
+                } catch(e) {
+                    localStorage.removeItem('emailjs_config');
+                }
+            }
+        })();
+    </script>
+    <script src="./static/js/app.js?v=20260614c"></script>
 </body>
 </html>
