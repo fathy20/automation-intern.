@@ -381,69 +381,46 @@ ${senderEmail}${linkedinText}`;
         return { html: htmlContent, plain: plainContent };
     }
 
-    function getHapticVisionMentorshipBody(companyName, senderName, senderPhone, senderEmail, linkedinUrl = "") {
+    // Removed getHapticVisionMentorshipBody as it's merged into getHapticVisionSponsorshipBody
+
+
+
+    function getHapticVisionSponsorshipBody(recipientName, companyName, category, senderName, senderPhone, senderEmail, linkedinUrl = "") {
         const greetingTarget = companyName ? `${companyName} Team` : "Team";
-        const linkedinHtml = linkedinUrl ? `<p><a href="${linkedinUrl}" style="color: #4f46e5; text-decoration: none; font-weight: bold;">LinkedIn Profile</a></p>` : "";
+        const linkedinHtml = linkedinUrl ? `<a href="${linkedinUrl}" style="color: #1155cc; text-decoration: none;">${linkedinUrl}</a>` : "";
         const linkedinText = linkedinUrl ? `\nLinkedIn: ${linkedinUrl}` : "";
 
         const htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9fafb; color: #1f2937; margin: 0; padding: 0; line-height: 1.6; }
-                .container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid #e5e7eb; }
-                .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; padding: 35px 25px; text-align: center; }
-                .header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-                .header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
-                .content { padding: 35px 30px; text-align: left; }
-                .content p { margin: 0 0 16px 0; font-size: 15px; color: #374151; }
-                .content h2 { margin: 24px 0 12px 0; font-size: 18px; font-weight: 600; color: #111827; border-bottom: 2px solid #e5e7eb; padding-bottom: 6px; }
-                .content ul { margin: 0 0 16px 0; padding-left: 20px; font-size: 15px; color: #374151; }
-                .content li { margin-bottom: 8px; }
-                .signature { margin-top: 35px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 14px; color: #6b7280; }
-                .signature strong { color: #111827; font-size: 15px; display: block; margin-bottom: 4px; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>HapticVision Mentorship</h1>
-                    <p>Innovative Assistive Technology for the Visually Impaired</p>
-                </div>
-                <div class="content">
-                    <p>Dear ${greetingTarget},</p>
-                    <p>I hope this message finds you well.</p>
-                    <p>My name is <strong>${senderName}</strong>, and I am writing on behalf of a team of final-year Computer and Communications Engineering students. We are currently developing our graduation project, <strong>HapticVision</strong>, and have been genuinely inspired by your pioneering work on telehaptic technology and the "remote sense of touch" — using 3D sensing and haptic feedback to help visually impaired individuals understand their surroundings.</p>
-                    
-                    <h2>About Our Project</h2>
-                    <p>HapticVision is a wearable headset prototype that uses depth sensors and computer vision to scan the user's environment in real time, translating obstacles, movement, distance, and direction into haptic feedback delivered to the user's forehead. Our goal is to build a functional, low-cost proof-of-concept that demonstrates the same core principle behind your SuperBrain device — but at a student-project scale.</p>
-                    <p>We are not attempting to replicate or commercialize your product. We deeply respect what <strong>${companyName}</strong> has achieved as a pioneer in this field, and our project is built as an educational exploration of telehaptic technology, combining computer vision, embedded systems, and haptic feedback design.</p>
-                    
-                    <h2>What We Are Asking For</h2>
-                    <p>We understand that ${companyName} is a focused, growing company, and we are not reaching out for corporate-level financial sponsorship. What would be invaluable to us is:</p>
-                    <ul>
-                        <li>Brief technical mentorship or guidance on sensor selection and haptic feedback design suitable for a low-budget prototype</li>
-                        <li>Insight into key challenges your team faced early in development, so we can anticipate and avoid common pitfalls</li>
-                        <li>Any recommendations on affordable hardware components that align with your technological approach</li>
-                        <li>If your team is open to it, recognition of ${companyName} as an inspiration and advisory reference for our graduation project</li>
-                    </ul>
-                    
-                    <p>Even a short email exchange or a brief call to ask a few technical questions would mean a great deal to us and would significantly strengthen our project.</p>
-                    <p>Thank you very much for the inspiring work you do, and for considering our request. We look forward to hearing from you.</p>
+        <div style="font-family: Arial, sans-serif; font-size: 14px; color: #222222; line-height: 1.5;">
+            <p>Dear ${greetingTarget},</p>
+            <p>I hope this message finds you well.</p>
+            <p>My name is ${senderName}, and I am writing on behalf of a team of final-year Computer and Communications Engineering students. We are currently developing our graduation project, HapticVision, and have been genuinely inspired by your pioneering work on telehaptic technology and the "remote sense of touch" — using 3D sensing and haptic feedback to help visually impaired individuals understand their surroundings.</p>
+            
+            <p>About Our Project</p>
+            <p>HapticVision is a wearable headset prototype that uses depth sensors and computer vision to scan the user's environment in real time, translating obstacles, movement, distance, and direction into haptic feedback delivered to the user's forehead. Our goal is to build a functional, low-cost proof-of-concept that demonstrates the same core principle behind your SuperBrain device — but at a student-project scale.</p>
+            
+            <p>We are not attempting to replicate or commercialize your product. We deeply respect what ${companyName} has achieved as a pioneer in this field, and our project is built as an educational exploration of telehaptic technology, combining computer vision, embedded systems, and haptic feedback design.</p>
+            
+            <p>What We Are Asking For</p>
+            <p>We understand that ${companyName} is a focused, growing company, and we are not reaching out for corporate-level financial sponsorship. What would be invaluable to us is:</p>
+            <p style="margin-left: 0;">
+                - Brief technical mentorship or guidance on sensor selection and haptic feedback design suitable for a low-budget prototype<br>
+                - Insight into key challenges your team faced early in development, so we can anticipate and avoid common pitfalls<br>
+                - Any recommendations on affordable hardware components that align with your technological approach<br>
+                - If your team is open to it, recognition of ${companyName} as an inspiration and advisory reference for our graduation project
+            </p>
+            
+            <p>Even a short email exchange or a brief call to ask a few technical questions would mean a great deal to us and would significantly strengthen our project.</p>
+            <p>Thank you very much for the inspiring work you do, and for considering our request. We look forward to hearing from you.</p>
 
-                    <div class="signature">
-                        <strong>${senderName}</strong>
-                        Final-Year Student, Computer and Communications Engineering<br>
-                        Mobile: ${senderPhone}<br>
-                        Email: <a href="mailto:${senderEmail}" style="color: #4f46e5;">${senderEmail}</a>
-                        ${linkedinHtml}
-                    </div>
-                </div>
-            </div>
-        </body>
-        </html>
+            <p>Best regards,<br>
+            ${senderName}<br>
+            Final-Year Student, Computer and Communications Engineering<br>
+            Mobile: ${senderPhone}<br>
+            Email: <a href="mailto:${senderEmail}" style="color: #1155cc; text-decoration: none;">${senderEmail}</a><br>
+            LinkedIn: ${linkedinHtml}
+            </p>
+        </div>
         `;
 
         const plainContent = \`Dear ${greetingTarget},
@@ -474,151 +451,6 @@ Final-Year Student, Computer and Communications Engineering
 Mobile: ${senderPhone}
 Email: ${senderEmail}${linkedinText}
 \`;
-
-        return { html: htmlContent, plain: plainContent };
-    }
-
-
-
-    function getHapticVisionSponsorshipBody(recipientName, companyName, category, senderName, senderPhone, senderEmail, linkedinUrl = "") {
-        const greetingTarget = formatGreeting(recipientName, companyName, category);
-        const linkedinHtml = linkedinUrl ? `<p><a href="${linkedinUrl}" style="color: #4f46e5; text-decoration: none; font-weight: bold;">LinkedIn Profile</a></p>` : "";
-        const linkedinText = linkedinUrl ? `\nLinkedIn: ${linkedinUrl}` : "";
-
-        const htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; color: #1f2937; margin: 0; padding: 0; line-height: 1.6; }
-                .container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid #e5e7eb; }
-                .header { background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: #ffffff; padding: 35px 25px; text-align: center; }
-                .header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-                .header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
-                .content { padding: 35px 30px; text-align: left; }
-                .greeting { font-size: 18px; font-weight: bold; color: #4f46e5; margin-bottom: 20px; }
-                .highlight-box { background-color: #eff6ff; border-left: 5px solid #3b82f6; padding: 18px; margin: 20px 0; border-radius: 4px; font-size: 15px; }
-                .section-title { font-weight: 700; color: #1f2937; margin-top: 25px; font-size: 16px; border-bottom: 1.5px solid #f3f4f6; padding-bottom: 6px; }
-                ul { padding-left: 20px; margin-top: 10px; }
-                li { margin-bottom: 8px; }
-                .signature { margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 20px; font-size: 14px; color: #4b5563; }
-                .signature-name { font-weight: bold; color: #4f46e5; font-size: 16px; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>HapticVision Graduation Project</h1>
-                    <p>Innovative Assistive Technology for the Visually Impaired</p>
-                </div>
-                <div class="content">
-                    <p class="greeting">Dear ${greetingTarget},</p>
-                    <p>I hope this email finds you well.</p>
-                    <p>My name is <strong>${senderName}</strong>, a Software Engineer and final-year student at the Faculty of Engineering and Computer Science. I am writing on behalf of our graduation project team to request your kind sponsorship and partnership for <strong>HapticVision</strong> — an innovative assistive technology project aimed at empowering blind and visually impaired individuals in Egypt.</p>
-                    
-                    <div class="section-title">Project Overview</div>
-                    <p><strong>HapticVision</strong> is a wearable headset device that introduces a revolutionary concept called "Remote Sense of Touch". The system uses advanced 3D cameras, depth sensors, and intelligent algorithms to scan the surrounding environment in real time and translate visual information (obstacles, people, movement, distance, and direction) into precise haptic (tactile) feedback felt on the user’s forehead.</p>
-                    <p>This hands-free solution significantly improves spatial awareness, mobility, safety, and independence for visually impaired users, while working complementarily with traditional aids such as the white cane or guide dog.</p>
-                    
-                    <p>As a graduation project from the Faculty of Engineering and Computer Science, HapticVision combines multiple disciplines including:</p>
-                    <ul>
-                        <li>Computer Vision & 3D Sensing</li>
-                        <li>Embedded Systems & Hardware Integration</li>
-                        <li>Haptic Feedback Algorithms</li>
-                        <li>Human-Computer Interaction (HCI)</li>
-                        <li>Real-time Data Processing</li>
-                    </ul>
-
-                    <div class="section-title">Why We Are Seeking Your Sponsorship</div>
-                    <div class="highlight-box">
-                        Your organization is a leader in innovation, healthcare technology, and social responsibility. Supporting this project aligns perfectly with your goals in:
-                        <ul style="margin-top: 8px; margin-bottom: 0;">
-                            <li>Advancing Assistive Technology and Digital Inclusion</li>
-                            <li>Empowering Persons with Disabilities</li>
-                            <li>Promoting impactful student innovation and entrepreneurship</li>
-                        </ul>
-                    </div>
-
-                    <div class="section-title">Forms of Support We Are Seeking:</div>
-                    <ul>
-                        <li>Financial sponsorship for device acquisition and pilot implementation</li>
-                        <li>Technical mentorship or hardware support</li>
-                        <li>Opportunity to conduct a Pilot Program with your partners or beneficiaries</li>
-                        <li>In-kind support (devices, testing facilities, or training venues)</li>
-                        <li>Visibility and joint participation in events such as Africa Health ExCon</li>
-                    </ul>
-
-                    <div class="section-title">We have attached the following documents for your review:</div>
-                    <ul>
-                        <li>Detailed Graduation Project Proposal (Pitch Deck)</li>
-                        <li>Explanatory Video of the Technology</li>
-                        <li>Project Timeline, Budget Breakdown, and Expected Impact</li>
-                    </ul>
-
-                    <p style="margin-top: 20px;">We would be extremely grateful for the opportunity to present our project in more detail through a short meeting or call at your convenience.</p>
-                    <p>Thank you for considering our request and for your continuous support to innovative student projects that create real social impact. We truly believe this collaboration can make a meaningful difference in the lives of many Egyptians.</p>
-
-                    <div class="signature">
-                        <p class="signature-name">Best regards,<br>${senderName}</p>
-                        <p style="margin: 5px 0;">Software Engineer & Team Lead – HapticVision Graduation Project</p>
-                        <p style="margin: 5px 0;">Faculty of Engineering and Computer Science</p>
-                        <p style="margin: 5px 0;">Mobile: ${senderPhone}</p>
-                        <p style="margin: 5px 0;">Email: ${senderEmail}</p>
-                        ${linkedinHtml}
-                    </div>
-                </div>
-            </div>
-        </body>
-        </html>
-        `;
-
-        const plainContent = `Dear ${greetingTarget},
-
-I hope this email finds you well.
-
-My name is ${senderName}, a Software Engineer and final-year student at the Faculty of Engineering and Computer Science. I am writing on behalf of our graduation project team to request your kind sponsorship and partnership for HapticVision — an innovative assistive technology project aimed at empowering blind and visually impaired individuals in Egypt.
-
-Project Overview
-HapticVision is a wearable headset device that introduces a revolutionary concept called "Remote Sense of Touch". The system uses advanced 3D cameras, depth sensors, and intelligent algorithms to scan the surrounding environment in real time and translate visual information (obstacles, people, movement, distance, and direction) into precise haptic (tactile) feedback felt on the user’s forehead.
-
-This hands-free solution significantly improves spatial awareness, mobility, safety, and independence for visually impaired users, while working complementarily with traditional aids such as the white cane or guide dog.
-
-As a graduation project from the Faculty of Engineering and Computer Science, HapticVision combines multiple disciplines including:
-- Computer Vision & 3D Sensing
-- Embedded Systems & Hardware Integration
-- Haptic Feedback Algorithms
-- Human-Computer Interaction (HCI)
-- Real-time Data Processing
-
-Why We Are Seeking Your Sponsorship
-Your organization is a leader in innovation, healthcare technology, and social responsibility. Supporting this project aligns perfectly with your goals in:
-- Advancing Assistive Technology and Digital Inclusion
-- Empowering Persons with Disabilities
-- Promoting impactful student innovation and entrepreneurship
-
-Forms of Support We Are Seeking:
-- Financial sponsorship for device acquisition and pilot implementation
-- Technical mentorship or hardware support
-- Opportunity to conduct a Pilot Program with your partners or beneficiaries
-- In-kind support (devices, testing facilities, or training venues)
-- Visibility and joint participation in events such as Africa Health ExCon
-
-We have attached the following documents for your review:
-- Detailed Graduation Project Proposal (Pitch Deck)
-- Explanatory Video of the Technology
-- Project Timeline, Budget Breakdown, and Expected Impact
-
-We would be extremely grateful for the opportunity to present our project in more detail through a short meeting or call at your convenience.
-
-Thank you for considering our request and for your continuous support to innovative student projects that create real social impact. We truly believe this collaboration can make a meaningful difference in the lives of many Egyptians.
-
-Best regards,
-${senderName}
-Software Engineer & Team Lead – HapticVision Graduation Project
-Faculty of Engineering and Computer Science
-Mobile: ${senderPhone}
-Email: ${senderEmail}${linkedinText}`;
 
         return { html: htmlContent, plain: plainContent };
     }
@@ -966,14 +798,11 @@ ${senderEmail}${linkedinText}`;
         const sEmail = config.sender_email || 'fathysaraf1@gmail.com';
         const sLinkedin = config.linkedin_url || '';
 
-        if (templateType === "HapticVision Mentorship (Detailed)") {
-            subject = `Final-Year Engineering Students Seeking Mentorship – Inspired by ${recipient.company_name}'s Telehaptic Technology (HapticVision Graduation Project)`;
-            bodies = getHapticVisionMentorshipBody(recipient.company_name, sName, sPhone, sEmail, sLinkedin);
-        } else if (templateType === "SuperBrain Partnership Outreach") {
+        if (templateType === "SuperBrain Partnership Outreach") {
             subject = "طلب شراكة / دعم لمشروع تقنية مساعدة مبتكرة للمكفوفين وضعاف البصر في مصر – SuperBrain";
             bodies = getSuperBrainBody(recipient.contact_person, recipient.category, sName, sPhone, sEmail, sLinkedin);
         } else if (templateType === "HapticVision Sponsorship (English)") {
-            subject = "Sponsorship Request: HapticVision Graduation Project – Innovative Assistive Technology for the Visually Impaired";
+            subject = `Final-Year Engineering Students Seeking Mentorship – Inspired by ${recipient.company_name}'s Telehaptic Technology (HapticVision Graduation Project)`;
             bodies = getHapticVisionSponsorshipBody(recipient.contact_person, recipient.company_name, recipient.category, sName, sPhone, sEmail, sLinkedin);
         } else {
             subject = `طلب تدريب صيفي - Summer Internship Application - ${sName}`;
