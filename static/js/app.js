@@ -139,6 +139,86 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Quick Test Mail
     const btnQuickPreview = document.getElementById('btn-quick-preview');
+    // Diagnose button
+    const btnDiagnose = document.getElementById('btn-diagnose');
+
+    // ----------------------------------------------------
+    // DIAGNOSTIC TOOL — check EmailJS credentials live
+    // ----------------------------------------------------
+    if (btnDiagnose) {
+        btnDiagnose.addEventListener('click', async () => {
+            const svc = config.emailjs_service_id || '(empty)';
+            const tpl = config.emailjs_template_id || '(empty)';
+            const pub = config.emailjs_public_key || '(empty)';
+
+            const lines = [
+                '══════════════════════════════',
+                '🔍 EmailJS Diagnostic Report',
+                '══════════════════════════════',
+                `Service ID  : ${svc}`,
+                `Template ID : ${tpl}`,
+                `Public Key  : ${pub.substring(0, 6)}...`,
+                '──────────────────────────────',
+                '⏳ Sending diagnostic test to EmailJS API...',
+            ];
+
+            alert(lines.join('\n'));
+
+            // Try sending a minimal test request
+            try {
+                const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: svc,
+                        template_id: tpl,
+                        user_id: pub,
+                        template_params: {
+                            to_email: config.sender_email || 'test@test.com',
+                            subject: '[DIAGNOSTIC TEST]',
+                            html_body: 'Diagnostic test email from HapticVision Outreach Hub.',
+                            plain_body: 'Diagnostic test email from HapticVision Outreach Hub.'
+                        }
+                    })
+                });
+
+                const statusCode = res.status;
+                const responseText = await res.text();
+
+                const resultLines = [
+                    '══════════════════════════════',
+                    `HTTP Status: ${statusCode}`,
+                    `Response: ${responseText}`,
+                    '──────────────────────────────',
+                ];
+
+                if (res.ok) {
+                    resultLines.push('✅ SUCCESS! EmailJS credentials are correct.');
+                    resultLines.push('If campaign still fails, reload the page (Ctrl+F5).');
+                } else if (statusCode === 400 && responseText.includes('template')) {
+                    resultLines.push('❌ ERROR: Template ID is WRONG or not found.');
+                    resultLines.push(`The template "${tpl}" does NOT exist in your EmailJS account.`);
+                    resultLines.push('👉 Fix: Go to https://dashboard.emailjs.com/admin/templates');
+                    resultLines.push('   and copy the exact Template ID (starts with template_).');
+                    resultLines.push('   Then paste it in EmailJS Settings tab and Save.');
+                } else if (statusCode === 400 && responseText.includes('service')) {
+                    resultLines.push('❌ ERROR: Service ID is WRONG.');
+                    resultLines.push('👉 Fix: Go to https://dashboard.emailjs.com/admin');
+                    resultLines.push('   and copy your correct Service ID.');
+                } else if (statusCode === 401 || responseText.includes('user_id') || responseText.includes('public key')) {
+                    resultLines.push('❌ ERROR: Public Key is WRONG.');
+                    resultLines.push('👉 Fix: Go to https://dashboard.emailjs.com/admin/account');
+                    resultLines.push('   and copy your correct Public Key.');
+                } else {
+                    resultLines.push(`❌ UNKNOWN ERROR: ${responseText}`);
+                }
+
+                alert(resultLines.join('\n'));
+            } catch (err) {
+                alert('❌ Network error - no internet connection or EmailJS is down.\n' + err.message);
+            }
+        });
+    }
 
     // ----------------------------------------------------
     // Tab Navigation Logic
