@@ -530,13 +530,16 @@ ${senderEmail}${linkedinText}`;
         if (saved) {
             config = JSON.parse(saved);
             if (!config.emailjs_service_id) config.emailjs_service_id = "service_74cjfib";
-            if (!config.emailjs_template_id) config.emailjs_template_id = "B7pluV26yjwcFWNsRIrfZ";
+            if (!config.emailjs_template_id || config.emailjs_template_id === "B7pluV26yjwcFWNsRIrfZ") {
+                config.emailjs_template_id = "template_u1zl9z9";
+                localStorage.setItem('emailjs_config', JSON.stringify(config));
+            }
             if (!config.emailjs_public_key) config.emailjs_public_key = "ULKnlSitxzcrZ1i81";
         } else {
             // Default fallbacks
             config = {
                 emailjs_service_id: "service_74cjfib",
-                emailjs_template_id: "B7pluV26yjwcFWNsRIrfZ",
+                emailjs_template_id: "template_u1zl9z9",
                 emailjs_public_key: "ULKnlSitxzcrZ1i81",
                 sender_name: "Fathy Sharaf",
                 sender_phone: "01002137288",
