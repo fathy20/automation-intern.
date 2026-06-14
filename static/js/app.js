@@ -423,7 +423,7 @@ ${senderEmail}${linkedinText}`;
         </div>
         `;
 
-        const plainContent = \`Dear ${greetingTarget},
+        const plainContent = `Dear ${greetingTarget},
 
 I hope this message finds you well.
 
@@ -450,7 +450,7 @@ ${senderName}
 Final-Year Student, Computer and Communications Engineering
 Mobile: ${senderPhone}
 Email: ${senderEmail}${linkedinText}
-\`;
+`;
 
         return { html: htmlContent, plain: plainContent };
     }
