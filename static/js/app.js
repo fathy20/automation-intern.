@@ -869,6 +869,10 @@ ${senderEmail}${linkedinText}`;
         dispatchLogs.innerHTML = '';
         
         appendLog('🚀 Campaign initialized...', 'info');
+        appendLog(`Configuration in use:`, 'info');
+        appendLog(` - Service ID: ${serviceId}`, 'info');
+        appendLog(` - Template ID: ${templateId}`, 'info');
+        appendLog(` - Public Key: ${publicKey.substring(0, 4)}...`, 'info');
         appendLog(`Preparing to send ${selectedRecipients.length} emails via EmailJS...`, 'info');
 
         let successCount = 0;
