@@ -381,6 +381,105 @@ ${senderEmail}${linkedinText}`;
         return { html: htmlContent, plain: plainContent };
     }
 
+    function getHapticVisionMentorshipBody(companyName, senderName, senderPhone, senderEmail, linkedinUrl = "") {
+        const greetingTarget = companyName ? `${companyName} Team` : "Team";
+        const linkedinHtml = linkedinUrl ? `<p><a href="${linkedinUrl}" style="color: #4f46e5; text-decoration: none; font-weight: bold;">LinkedIn Profile</a></p>` : "";
+        const linkedinText = linkedinUrl ? `\nLinkedIn: ${linkedinUrl}` : "";
+
+        const htmlContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9fafb; color: #1f2937; margin: 0; padding: 0; line-height: 1.6; }
+                .container { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid #e5e7eb; }
+                .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; padding: 35px 25px; text-align: center; }
+                .header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+                .header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
+                .content { padding: 35px 30px; text-align: left; }
+                .content p { margin: 0 0 16px 0; font-size: 15px; color: #374151; }
+                .content h2 { margin: 24px 0 12px 0; font-size: 18px; font-weight: 600; color: #111827; border-bottom: 2px solid #e5e7eb; padding-bottom: 6px; }
+                .content ul { margin: 0 0 16px 0; padding-left: 20px; font-size: 15px; color: #374151; }
+                .content li { margin-bottom: 8px; }
+                .signature { margin-top: 35px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 14px; color: #6b7280; }
+                .signature strong { color: #111827; font-size: 15px; display: block; margin-bottom: 4px; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>HapticVision Mentorship</h1>
+                    <p>Innovative Assistive Technology for the Visually Impaired</p>
+                </div>
+                <div class="content">
+                    <p>Dear ${greetingTarget},</p>
+                    <p>I hope this message finds you well.</p>
+                    <p>My name is <strong>${senderName}</strong>, and I am writing on behalf of a team of final-year Computer and Communications Engineering students. We are currently developing our graduation project, <strong>HapticVision</strong>, and have been genuinely inspired by your pioneering work on telehaptic technology and the "remote sense of touch" — using 3D sensing and haptic feedback to help visually impaired individuals understand their surroundings.</p>
+                    
+                    <h2>About Our Project</h2>
+                    <p>HapticVision is a wearable headset prototype that uses depth sensors and computer vision to scan the user's environment in real time, translating obstacles, movement, distance, and direction into haptic feedback delivered to the user's forehead. Our goal is to build a functional, low-cost proof-of-concept that demonstrates the same core principle behind your SuperBrain device — but at a student-project scale.</p>
+                    <p>We are not attempting to replicate or commercialize your product. We deeply respect what <strong>${companyName}</strong> has achieved as a pioneer in this field, and our project is built as an educational exploration of telehaptic technology, combining computer vision, embedded systems, and haptic feedback design.</p>
+                    
+                    <h2>What We Are Asking For</h2>
+                    <p>We understand that ${companyName} is a focused, growing company, and we are not reaching out for corporate-level financial sponsorship. What would be invaluable to us is:</p>
+                    <ul>
+                        <li>Brief technical mentorship or guidance on sensor selection and haptic feedback design suitable for a low-budget prototype</li>
+                        <li>Insight into key challenges your team faced early in development, so we can anticipate and avoid common pitfalls</li>
+                        <li>Any recommendations on affordable hardware components that align with your technological approach</li>
+                        <li>If your team is open to it, recognition of ${companyName} as an inspiration and advisory reference for our graduation project</li>
+                    </ul>
+                    
+                    <p>Even a short email exchange or a brief call to ask a few technical questions would mean a great deal to us and would significantly strengthen our project.</p>
+                    <p>Thank you very much for the inspiring work you do, and for considering our request. We look forward to hearing from you.</p>
+
+                    <div class="signature">
+                        <strong>${senderName}</strong>
+                        Final-Year Student, Computer and Communications Engineering<br>
+                        Mobile: ${senderPhone}<br>
+                        Email: <a href="mailto:${senderEmail}" style="color: #4f46e5;">${senderEmail}</a>
+                        ${linkedinHtml}
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+        `;
+
+        const plainContent = \`Dear ${greetingTarget},
+
+I hope this message finds you well.
+
+My name is ${senderName}, and I am writing on behalf of a team of final-year Computer and Communications Engineering students. We are currently developing our graduation project, HapticVision, and have been genuinely inspired by your pioneering work on telehaptic technology and the "remote sense of touch" — using 3D sensing and haptic feedback to help visually impaired individuals understand their surroundings.
+
+About Our Project
+HapticVision is a wearable headset prototype that uses depth sensors and computer vision to scan the user's environment in real time, translating obstacles, movement, distance, and direction into haptic feedback delivered to the user's forehead. Our goal is to build a functional, low-cost proof-of-concept that demonstrates the same core principle behind your SuperBrain device — but at a student-project scale.
+
+We are not attempting to replicate or commercialize your product. We deeply respect what ${companyName} has achieved as a pioneer in this field, and our project is built as an educational exploration of telehaptic technology, combining computer vision, embedded systems, and haptic feedback design.
+
+What We Are Asking For
+We understand that ${companyName} is a focused, growing company, and we are not reaching out for corporate-level financial sponsorship. What would be invaluable to us is:
+- Brief technical mentorship or guidance on sensor selection and haptic feedback design suitable for a low-budget prototype
+- Insight into key challenges your team faced early in development, so we can anticipate and avoid common pitfalls
+- Any recommendations on affordable hardware components that align with your technological approach
+- If your team is open to it, recognition of ${companyName} as an inspiration and advisory reference for our graduation project
+
+Even a short email exchange or a brief call to ask a few technical questions would mean a great deal to us and would significantly strengthen our project.
+
+Thank you very much for the inspiring work you do, and for considering our request. We look forward to hearing from you.
+
+Best regards,
+${senderName}
+Final-Year Student, Computer and Communications Engineering
+Mobile: ${senderPhone}
+Email: ${senderEmail}${linkedinText}
+\`;
+
+        return { html: htmlContent, plain: plainContent };
+    }
+
+
+
     function getHapticVisionSponsorshipBody(recipientName, companyName, category, senderName, senderPhone, senderEmail, linkedinUrl = "") {
         const greetingTarget = formatGreeting(recipientName, companyName, category);
         const linkedinHtml = linkedinUrl ? `<p><a href="${linkedinUrl}" style="color: #4f46e5; text-decoration: none; font-weight: bold;">LinkedIn Profile</a></p>` : "";
@@ -707,11 +806,17 @@ ${senderEmail}${linkedinText}`;
             else if (c.category === 'Baseera') badgeClass = 'badge-baseera';
             else if (c.category === 'CSR') badgeClass = 'badge-csr';
 
+            let statusBadge = `<span class="badge" style="background: rgba(148, 163, 184, 0.2); color: #94a3b8;">Pending</span>`;
+            if (c.status === 'Sent') {
+                statusBadge = `<span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Sent ✅</span>`;
+            }
+
             tr.innerHTML = `
                 <td><strong>${escapeHtml(c.company_name)}</strong></td>
                 <td>${escapeHtml(c.contact_person)}</td>
                 <td><a href="mailto:${c.email}" style="color:#38bdf8; text-decoration:none;">${escapeHtml(c.email)}</a></td>
                 <td><span class="badge ${badgeClass}">${c.category}</span></td>
+                <td>${statusBadge}</td>
                 <td><span style="font-size:0.8rem; color:var(--text-secondary);">${escapeHtml(c.notes || '')}</span></td>
                 <td>
                     <div class="table-actions">
@@ -824,10 +929,15 @@ ${senderEmail}${linkedinText}`;
         contacts.forEach((c, index) => {
             const div = document.createElement('label');
             div.className = 'recipient-option';
+            
+            // Uncheck if already sent
+            const isChecked = c.status === 'Sent' ? '' : 'checked';
+            const statusLabel = c.status === 'Sent' ? '<span style="color:#10b981; font-size:0.8rem; margin-left: 5px;">(Already Sent)</span>' : '';
+            
             div.innerHTML = `
-                <input type="checkbox" class="recipient-checkbox" value="${index}" checked>
+                <input type="checkbox" class="recipient-checkbox" value="${index}" ${isChecked}>
                 <div class="recipient-details">
-                    <span class="name">${escapeHtml(c.company_name)} - ${escapeHtml(c.contact_person)}</span>
+                    <span class="name">${escapeHtml(c.company_name)} - ${escapeHtml(c.contact_person)} ${statusLabel}</span>
                     <span class="info">${escapeHtml(c.email)} (${c.category})</span>
                 </div>
             `;
@@ -856,7 +966,10 @@ ${senderEmail}${linkedinText}`;
         const sEmail = config.sender_email || 'fathysaraf1@gmail.com';
         const sLinkedin = config.linkedin_url || '';
 
-        if (templateType === "SuperBrain Partnership Outreach") {
+        if (templateType === "HapticVision Mentorship (Detailed)") {
+            subject = `Final-Year Engineering Students Seeking Mentorship – Inspired by ${recipient.company_name}'s Telehaptic Technology (HapticVision Graduation Project)`;
+            bodies = getHapticVisionMentorshipBody(recipient.company_name, sName, sPhone, sEmail, sLinkedin);
+        } else if (templateType === "SuperBrain Partnership Outreach") {
             subject = "طلب شراكة / دعم لمشروع تقنية مساعدة مبتكرة للمكفوفين وضعاف البصر في مصر – SuperBrain";
             bodies = getSuperBrainBody(recipient.contact_person, recipient.category, sName, sPhone, sEmail, sLinkedin);
         } else if (templateType === "HapticVision Sponsorship (English)") {
@@ -996,6 +1109,9 @@ ${senderEmail}${linkedinText}`;
             if (result.success) {
                 appendLog(`✅ Success: Email delivered to ${recipient.company_name}!`, 'success');
                 successCount++;
+                recipient.status = 'Sent';
+                localStorage.setItem('health_tech_contacts', JSON.stringify(contacts));
+                renderContactsTable(contacts);
                 reportLogs.push({ company: recipient.company_name, email: recipient.email, status: 'Success', details: 'Sent successfully' });
             } else {
                 appendLog(`❌ Failed for ${recipient.company_name}: ${result.message}`, 'error');
